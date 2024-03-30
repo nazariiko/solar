@@ -377,4 +377,8 @@ body {
   .final-submit {
     width: 85vw;
   }
+
+  .quiz {
+    margin-top: 15px;
+  }
 }
