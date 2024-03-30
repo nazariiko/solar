@@ -353,4 +353,28 @@ body {
   input {
     font-size: 16px;
   }
+
+  .postal-form {
+    width: 85vw;
+  }
+
+  .postal-code-container {
+    width: 100%;
+  }
+
+  .postal-input {
+    width: 80%;
+  }
+
+  .postal-approve {
+    width: 100%;
+  }
+
+  .form-fields {
+    width: 85vw;
+  }
+
+  .final-submit {
+    width: 85vw;
+  }
 }
