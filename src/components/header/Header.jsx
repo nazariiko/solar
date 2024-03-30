@@ -1,7 +1,11 @@
 import React from 'react';
 import logo from '../../assets/logo.jpg';
 
-const Header = () => {
+const Header = ({ visible }) => {
+  if (!visible) {
+    return (<></>)
+  }
+  
   return (
     <div className='header'>
       <img className='logo' src={logo} />

@@ -3,6 +3,8 @@ import { useForm, Controller } from 'react-hook-form';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import axios from 'axios';
+import postIcon from '../../assets/post.svg';
+import personIcon from '../../assets/person-circle.svg';
 
 const Form = ({ postalCode, answers }) => {
   const {
@@ -10,10 +12,29 @@ const Form = ({ postalCode, answers }) => {
     handleSubmit,
     control,
     formState: { errors },
+    setError
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const handleSendInfoToTelegram = async (data) => {
+    // 857401534
+    // 435778610
+    const message = `
+      %0AName: ${data.name}
+      %0AEmail: ${data.email}
+      %0APhone: ${data.phone}
+      %0APost code: ${postalCode}%0A
+      ${answers.map(item => item.text).join('%0A')}
+    `
+    await axios.get(`https://api.telegram.org/bot6509990959:AAFKjsZ1Qs125PE5OqaGzz9xros0yKiXUyA/sendMessage?chat_id=435778610&text=${message}`)
+  }
+
+  const onSubmit = async (data) => {
+    const res = await axios.get(`https://api.zerobounce.net/v2/validate?api_key=875373e43c5b468bbeaec6eee91244f9&email=${data.email}&ip_address=156.124.12.145`)
+    if (res?.data?.status == 'valid') {
+      handleSendInfoToTelegram(data)
+    } else {
+      setError('email', { type: 'validate' })
+    }
   };
 
   return (
@@ -25,11 +46,16 @@ const Form = ({ postalCode, answers }) => {
       </h2>
       <div className="form-fields">
         <div className="form-field">
-          <input
-            placeholder="Name"
+          <div
             className={`form-input ${errors.name ? 'error' : ''}`}
-            {...register('name', { required: true })}
-          />
+          >
+            <img src={personIcon} />
+            <input
+              placeholder="Name"
+              className={` ${errors.name ? 'error' : ''}`}
+              {...register('name', { required: true })}
+            />
+          </div>
           <div className="form-error">{errors.name ? 'erforderlich' : ''}</div>
         </div>
         <div className="form-field">
@@ -64,24 +90,19 @@ const Form = ({ postalCode, answers }) => {
           <Controller
             name="email"
             control={control}
-            rules={{
-              validate: async (value) => {
-                const res = await axios.get(`https://api.zerobounce.net/v2/validate?api_key=875373e43c5b468bbeaec6eee91244f9&email=${value}&ip_address=156.124.12.145`)
-                if (res?.data?.status == 'valid') {
-                  return true
-                } else {
-                  return false
-                }
-              },
-            }}
             render={({ field: { onChange, value } }) => (
-              <input
-                placeholder="Email"
+              <div
                 className={`form-input ${errors.email ? 'error' : ''}`}
-                {...register('email', { required: true })}
-                value={value}
-                onChange={onChange}
-              />
+              >
+                <img src={postIcon} />
+                <input
+                  placeholder="Email"
+                  className={`${errors.email ? 'error' : ''}`}
+                  {...register('email', { required: true })}
+                  value={value}
+                  onChange={onChange}
+                />
+              </div>
             )}
           />
           <div className="form-error">{errors.email ? errors.email.required ? 'erforderlich' : 'ungültige EMail' : ''}</div>

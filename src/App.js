@@ -1,28 +1,20 @@
+import { useState } from "react";
 import Header from "./components/header/Header";
 import Quiz from "./components/quiz/Quiz";
-import icon from './assets/checkmark.svg';
 
 
 function App() {
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true)
+
+  const handleHideHeader = () => {
+    setIsHeaderVisible(false)
+  }
+
   return (
     <div className="app">
-      <Header />
+      <Header visible={isHeaderVisible} />
       <div className="main">
-        <Quiz />
-      </div>
-      <div className="bottom-icons">
-        <div className="bottom-item">
-          <img src={icon} />
-          <p>100% kostenlos & unverbindlich</p>
-        </div>
-        <div className="bottom-item">
-          <img src={icon} />
-          <p>Regionale Anbieter</p>
-        </div>
-        <div className="bottom-item">
-          <img src={icon} />
-          <p>Staatliche Förderungen nutzen</p>
-        </div>
+        <Quiz handleHideHeader={handleHideHeader} />
       </div>
       <div className="footer">
         <a href="https://checkfox.de/impressum" target="_blank">Impressum</a> <span>|</span>  <a href="https://checkfox.de/datenschutzerklaerung" target="_blank">Datenschutz</a>

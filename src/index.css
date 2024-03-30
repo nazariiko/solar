@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: "Times New Roman", Times, serif; 
+  font-family: "Roboto"; 
 }
 
 .app {
@@ -75,20 +75,22 @@ body {
 
 .question {
   margin-top: 40px;
-  font-size: 26px;
   color: #06331a;
   margin-bottom: 30px;
   text-align: center;
+  height: 3em;
 }
 
 .options {
   display: flex;
   flex-direction: column;
   row-gap: 15px;
+  height: 450px;
+  width: 420px;
+  flex: 1 1 0px;
 }
 
 .quiz-option {
-  height: 90px;
   width: 420px;
   display: flex;
   align-items: center;
@@ -114,13 +116,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 400px;
+  width: 420px;
 }
 
 .action-buttons div {
   cursor: pointer;
   font-size: 18px;
   text-transform: uppercase;
+  display: flex;
+  color: white;
+  border-radius: 10px;
+  background-color: black;
+  padding: 10px 30px;
 }
 
 .go-btn {
@@ -216,10 +223,29 @@ body {
   background-color: white;
   height: 60px;
   outline: none;
-  border: 2px solid #bcffd1;
+  border: 2px solid black;
   border-radius: 10px;
   padding-left: 15px;
   font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  font-family: Roboto;
+}
+
+.form-input:not(.PhoneInput) input {
+  height: 100%;
+  outline: none;
+  border: none;
+  width: 80%;
+  font-size: 20px;
+}
+
+.form-input > img {
+  height: 50%;
+  margin-right: 20px;
 }
 
 .form-input.error {
@@ -275,7 +301,7 @@ body {
 }
 
 .bottom-icons {
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .footer {
@@ -291,6 +317,19 @@ body {
 .footer a {
   text-decoration: none;
   color: #939191;
+}
+
+.first-screen-btn {
+  margin-top: 30px;
+  cursor: pointer;
+  height: 40px;
+  padding: 0 40px;
+  border-radius: 10px;
+  color: white;
+  background-color: #18ab18;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 870px) {
@@ -329,13 +368,11 @@ body {
 
   .question {
     font-size: 22px;
-    margin: 20px;
     padding: 0 15px;
   }
 
   .quiz-option  {
     width: 85vw;
-    height: 60px;
   }
 
   .final-form {
@@ -344,6 +381,10 @@ body {
 
   .action-buttons {
     width:85vw;
+  }
+
+  .options {
+    width: 85vw;
   }
 
   .postal-input {
