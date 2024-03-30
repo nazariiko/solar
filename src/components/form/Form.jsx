@@ -26,7 +26,7 @@ const Form = ({ postalCode, answers }) => {
       %0APost code: ${postalCode}%0A
       ${answers.map(item => item.text).join('%0A')}
     `
-    await axios.get(`https://api.telegram.org/bot6509990959:AAFKjsZ1Qs125PE5OqaGzz9xros0yKiXUyA/sendMessage?chat_id=435778610&text=${message}`)
+    await axios.get(`https://api.telegram.org/bot6509990959:AAFKjsZ1Qs125PE5OqaGzz9xros0yKiXUyA/sendMessage?chat_id=857401534&text=${message}`)
 
     document.querySelector('.main').innerHTML = ''
     document.querySelector('.main').insertAdjacentHTML('beforeend', `
