@@ -334,11 +334,23 @@ body {
   }
 
   .quiz-option  {
-    width: 90vw;
+    width: 85vw;
     height: 60px;
   }
 
   .final-form {
-    width: 90vw;
+    width: 85vw;
+  }
+
+  .action-buttons {
+    width:85vw;
+  }
+
+  .postal-input {
+    font-size: 16px;
+  }
+
+  input {
+    font-size: 16px;
   }
 }
