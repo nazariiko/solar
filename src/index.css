@@ -146,6 +146,8 @@ body {
   border-radius: 10px;
   width: 400px;
   overflow: hidden;
+  position: relative;
+  overflow: visible;
 }
 
 .geo-icon {
@@ -422,4 +424,25 @@ input {
   .quiz {
     margin-top: 15px;
   }
+}
+
+.postal-codes-popup {
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+  top: 70px;
+  border-radius: 10px;
+  background-color: white;
+  border: 2px solid black;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.postal-codes-popup div {
+  padding: 10px 0px 10px 15px;
+  transition: all 0.25s ease-in-out;
+}
+
+.postal-codes-popup div:hover {
+  background-color: rgb(210, 255, 217);
 }

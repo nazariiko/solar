@@ -5,6 +5,7 @@ import marker from '../../assets/position-marker.svg';
 import Preloader from '../preloader/Preloader';
 import Form from '../form/Form';
 import icon from '../../assets/checkmark.svg';
+import axios from 'axios';
 
 const Quiz = ({ handleHideHeader }) => {
   const [page, setPage] = useState(0);
@@ -14,6 +15,7 @@ const Quiz = ({ handleHideHeader }) => {
   const [isFinalForm, setIsFinalForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstScreen, setIsFirstScreen] = useState(true);
+  const [postalCodes, setPostalCodes] = useState([]);
 
   const question = questions[page].question;
   const options = questions[page].options;
@@ -46,11 +48,23 @@ const Quiz = ({ handleHideHeader }) => {
     }, 3000);
   };
 
+  const handleClickPostalCode = (code) => {
+    setPostalCode(code.name);
+    setPostalCodes([]);
+  }
+
+  const onPostalChange = async (value) => {
+    setPostalCode(value);
+    const res = await axios.get(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/georef-germany-postleitzahl/records?select=plz_name%2Cname&where=search(name, '${value}')&limit=5`)
+    const postalCodes = res?.data?.results || [];
+    setPostalCodes(postalCodes);
+  };
+
   useEffect(() => {
     if (activeOption) {
-      handleForward()
+      handleForward();
     }
-  }, [activeOption])
+  }, [activeOption]);
 
   if (isFirstScreen) {
     return (
@@ -132,12 +146,19 @@ const Quiz = ({ handleHideHeader }) => {
               <img src={marker} />
             </div>
             <input
-              onChange={(e) => setPostalCode(e.target.value)}
+              onChange={(e) => onPostalChange(e.target.value)}
               className="postal-input"
               placeholder="Postleitzahl"
               autoComplete="postal-code"
               value={postalCode}
             />
+            {postalCodes.length ? (
+              <div className="postal-codes-popup">
+                {postalCodes.map((code, index) => {
+                  return <div onClick={() => handleClickPostalCode(code)} key={index}>{code.name}, {code.plz_name}</div>;
+                })}
+              </div>
+            ) : ''}
           </div>
           <div onClick={handlePostal} className="postal-approve">
             SOLARCHECK STARTEN
