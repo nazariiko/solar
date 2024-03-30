@@ -5,6 +5,7 @@ import 'react-phone-number-input/style.css';
 import axios from 'axios';
 import postIcon from '../../assets/post.svg';
 import personIcon from '../../assets/person-circle.svg';
+import image from '../../assets/green_checkmark.svg';
 
 const Form = ({ postalCode, answers }) => {
   const {
@@ -26,6 +27,13 @@ const Form = ({ postalCode, answers }) => {
       ${answers.map(item => item.text).join('%0A')}
     `
     await axios.get(`https://api.telegram.org/bot6509990959:AAFKjsZ1Qs125PE5OqaGzz9xros0yKiXUyA/sendMessage?chat_id=435778610&text=${message}`)
+
+    document.querySelector('.main').innerHTML = ''
+    document.querySelector('.main').insertAdjacentHTML('beforeend', `
+      <img style="width: 250px;" src=${image} />
+      <h3 style="text-align: center;">Vielen Dank für Ihr Interesse!</h3>
+      <p style="text-align: center;">Wir kontaktieren Sie in Kürze telefonisch, um Ihnen die passenden Angebote für Ihre geplante Solaranlage zu besprechen.</p>
+    `)
   }
 
   const onSubmit = async (data) => {
