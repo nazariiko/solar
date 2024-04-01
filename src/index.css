@@ -581,4 +581,8 @@ input {
   .number-info-list {
     gap: 40px;
   }
+
+  .final-form {
+    margin-top: 30px;
+  }
 }
