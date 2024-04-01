@@ -6,6 +6,15 @@ import Preloader from '../preloader/Preloader';
 import Form from '../form/Form';
 import icon from '../../assets/checkmark.svg';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import animationData from '../../animations/firts-screen.json';
+import Lottie from 'react-lottie';
+import MoneyIcon from '@mui/icons-material/Money';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import CompareIcon from '@mui/icons-material/Compare';
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 
 const Quiz = ({ handleHideHeader }) => {
   const [page, setPage] = useState(0);
@@ -16,6 +25,12 @@ const Quiz = ({ handleHideHeader }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstScreen, setIsFirstScreen] = useState(true);
   const [postalCodes, setPostalCodes] = useState([]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const question = questions[page].question;
   const options = questions[page].options;
@@ -54,7 +69,7 @@ const Quiz = ({ handleHideHeader }) => {
   }
 
   const onPostalChange = async (value) => {
-    setPostalCode(value);
+    setPostalCode(value)
     const res = await axios.get(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/georef-germany-postleitzahl/records?select=plz_name%2Cname&where=search(name, '${value}')&limit=5`)
     const postalCodes = res?.data?.results || [];
     setPostalCodes(postalCodes);
@@ -72,7 +87,7 @@ const Quiz = ({ handleHideHeader }) => {
         <h2 style={{ marginBottom: '20px', textAlign: 'center', fontSize: 34 }}>
           SolarInvestCheck:{' '}
         </h2>
-        <p style={{ textAlign: 'center', fontSize: 22 }}>
+        <p style={{ textAlign: 'center', fontSize: 20 }}>
           Lohnt sich die Investition in eine Solaranlage für Sie?
         </p>
         <div className="bottom-icons">
@@ -96,6 +111,91 @@ const Quiz = ({ handleHideHeader }) => {
           }}
           className="first-screen-btn">
           KOSTENLOS PRÜFEN
+        </div>
+        <div className='animation'>
+          <Lottie 
+            options={{
+              loop: false,
+              animationData: animationData
+            }}
+            width={370}
+          />
+        </div>
+        <div className='first-screen-info'>
+          <h2 className='first-screen-info__heading'>So einfach funktioniert's</h2>
+          <div className='number-info-list'>
+            <div className='number-info-list__item'>
+              <div className='number-in-circle'>1</div>
+              <div>
+                <h3>Preis-Check starten</h3>
+                <p>Besuchen Sie unsere Webseite und beginnen Sie den kostenlosen Preis-Check.</p>
+              </div>
+            </div>
+            <div className='number-info-list__item'>
+              <div className='number-in-circle'>2</div>
+              <div>
+                <h3>Fragen beantworten</h3>
+                <p>Beantworten Sie einige einfache Fragen zu Ihren Anforderungen und Vorstellungen bezüglich der Photovoltaikanlage.</p>
+              </div>
+            </div>
+            <div className='number-info-list__item'>
+              <div className='number-in-circle'>3</div>
+              <div>
+                <h3>Angebote und Bewertungen erhalten</h3>
+                <p>Nach der Beantwortung der Fragen erhalten Sie maßgeschneiderte Angebote und Bewertungen verschiedener Fachanbieter in Ihrer Region.</p>
+              </div>
+            </div>
+            <div className='number-info-list__item'>
+              <div className='number-in-circle'>4</div>
+              <div>
+                <h3>Besten Anbieter auswählen</h3>
+                <p>Vergleichen Sie die Angebote und wählen Sie den Anbieter aus, der am besten zu Ihren Bedürfnissen und Ihrem Budget passt.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className='icon-info-list'>
+            <div className='icon-info-list__item'>
+              <MoneyIcon />
+              <h3>Überbezahlung für Solaranlagen</h3>
+              <p>Verhindern Sie, dass Sie zu hohe Preise für Ihre Photovoltaikanlage zahlen.</p>
+            </div>
+            <div className='icon-info-list__item'>
+              <ThumbDownIcon />
+              <h3>Mangelhafte Qualität</h3>
+              <p>Schützen Sie sich vor Anbietern, die minderwertige Solaranlagen verkaufen.</p>
+            </div>
+            <div className='icon-info-list__item'>
+              <CompareIcon />
+              <h3>Fehlende Vergleichsmöglichkeiten</h3>
+              <p>Vermeiden Sie es, ohne Vergleichsmöglichkeiten eine Entscheidung zu treffen.</p>
+            </div>
+            <div className='icon-info-list__item'>
+              <PriorityHighIcon />
+              <h3>Unzureichende Marktkompetenz</h3>
+              <p>Lassen Sie sich nicht durch Unkenntnis der aktuellen Marktlage in die Irre führen.</p>
+            </div>
+            <div className='icon-info-list__item'>
+              <AccessTimeIcon />
+              <h3>Lange Wartezeiten</h3>
+              <p>Umgehen Sie Anbieter mit übermäßig langen Liefer- und Installationszeiten.</p>
+            </div>
+            <div className='icon-info-list__item'>
+              <RecordVoiceOverIcon />
+              <h3>Unklare Garantiebedingungen</h3>
+              <p>Schließen Sie Anbieter mit undurchsichtigen oder unzureichenden Garantie- und Serviceleistungen aus.</p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style={{ marginTop: '60px' }}
+          onClick={() => {
+            setIsFirstScreen(false);
+            handleHideHeader();
+          }}
+          className="first-screen-btn">
+          Jetzt Preis-Check starten!
         </div>
       </div>
     );
@@ -140,17 +240,17 @@ const Quiz = ({ handleHideHeader }) => {
           </div>
         </>
       ) : !isFinalForm ? (
-        <div className="postal-form">
-          <div className="postal-code-container">
+        <form className="postal-form" onSubmit={handleSubmit(handlePostal)}>
+          <div className={`postal-code-container ${errors.postalCode ? 'error' : ''}`}>
             <div className="geo-icon">
               <img src={marker} />
             </div>
             <input
-              onChange={(e) => onPostalChange(e.target.value)}
               className="postal-input"
               placeholder="Postleitzahl"
               autoComplete="postal-code"
               value={postalCode}
+              {...register('postalCode', { required: true, onChange: (e) => onPostalChange(e.target.value) })}
             />
             {postalCodes.length ? (
               <div className="postal-codes-popup">
@@ -160,10 +260,10 @@ const Quiz = ({ handleHideHeader }) => {
               </div>
             ) : ''}
           </div>
-          <div onClick={handlePostal} className="postal-approve">
+          <button className="postal-approve" type='submit'>
             SOLARCHECK STARTEN
-          </div>
-        </div>
+          </button>
+        </form>
       ) : isLoading ? (
         <Preloader loading={isLoading} />
       ) : (

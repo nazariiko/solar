@@ -47,11 +47,8 @@ const Form = ({ postalCode, answers }) => {
 
   return (
     <form className="final-form" onSubmit={handleSubmit(onSubmit)}>
-      <h2>
-        {' '}
-        Wir haben bis zu 4 passende Angebote in Ihrer Region gefunden. Bitte vervollständigen Sie
-        die fehlenden Daten, um die Angebote zu erhalten.
-      </h2>
+      <p className='final-form-p'>Wir haben bis zu 4 passende Anbieter in Ihrer Regionen gefunden.</p>
+      <h2 className='final-form-h2'>Bitte vervollständigen Sie die fehlenden Daten, um die günstigsten Angebote zu erhalten.</h2>
       <div className="form-fields">
         <div className="form-field">
           <div
@@ -86,7 +83,7 @@ const Form = ({ postalCode, answers }) => {
                 className={`form-input ${errors.phone ? 'error' : ''}`}
                 value={value}
                 onChange={onChange}
-                defaultCountry="TH"
+                defaultCountry="DE"
                 placeholder="Telefon"
                 id="phone"
               />

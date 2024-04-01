@@ -57,7 +57,7 @@ body {
   height: 20px;
   width: 600px;
   left: 0;
-  background-color: black;
+  background-color: #F8BC26;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,7 +78,7 @@ body {
   color: #06331a;
   margin-bottom: 30px;
   text-align: center;
-  height: 3em;
+  height: 4em;
 }
 
 .options {
@@ -126,7 +126,7 @@ body {
   display: flex;
   color: white;
   border-radius: 10px;
-  background-color: black;
+  background-color: #5B9B37;
   padding: 10px 30px;
 }
 
@@ -148,6 +148,7 @@ body {
   overflow: hidden;
   position: relative;
   overflow: visible;
+  border: 2px solid transparent;
 }
 
 .geo-icon {
@@ -165,9 +166,9 @@ body {
 .postal-input {
   border: none;
   outline: none;
-  height: 60px;
   width: 370px;
   padding-left: 10px;
+  border-radius: 10px;
 }
 
 .postal-approve {
@@ -178,9 +179,15 @@ body {
   justify-content: center;
   cursor: pointer;
   height: 40px;
-  background-color: #18ab18;
+  background-color: #5B9B37;
   color: white;
   border-radius: 10px;
+  outline: none;
+  border: none;
+}
+
+.postal-code-container.error {
+  border-color: red;
 }
 
 .preloader {
@@ -204,9 +211,14 @@ body {
   align-items: center;
 }
 
-.final-form  h2 {
+.final-form-h2 {
   text-align: center;
   margin-bottom: 30px;
+}
+
+.final-form-p {
+  text-align: center;
+  margin-bottom: 15px;
 }
 
 .form-fields {
@@ -270,7 +282,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #18ab18;
+  background-color: #5B9B37;
   color: white;
   border: none;
   border-radius: 10px;
@@ -328,7 +340,7 @@ input {
   padding: 0 40px;
   border-radius: 10px;
   color: white;
-  background-color: #18ab18;
+  background-color: #5B9B37;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -369,8 +381,9 @@ input {
   }
 
   .question {
-    font-size: 22px;
+    font-size: 20px;
     padding: 0 15px;
+    margin-top: 25px;
   }
 
   .quiz-option  {
@@ -445,4 +458,127 @@ input {
 
 .postal-codes-popup div:hover {
   background-color: rgb(210, 255, 217);
+}
+
+.animation {
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
+.first-screen-info__heading {
+  font-weight: 400;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.number-info-list__item {
+  display: flex;
+}
+
+.number-in-circle {
+  height: 60px;
+  width: 60px;
+  min-height: 60px;
+  min-width: 60px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 26px;
+  background-color: #5B9B37;
+  margin-right: 30px;
+}
+
+.number-info-list__item h3 {
+  font-size: 19px;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.number-info-list__item p {
+  font-size: 15px;
+  font-weight: 400;
+  color: grey;
+}
+
+
+.icon-info-list__item h3 {
+  font-size: 19px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.icon-info-list__item p {
+  font-size: 15px;
+  font-weight: 400;
+  color: grey;
+  text-align: center;
+}
+
+.number-info-list {
+  display: flex;
+  gap: 80px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.number-info-list__item {
+  max-width: 600px;
+  flex-basis: 50%;
+}
+
+.icon-info-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 0 auto;
+  margin-top: 60px;
+  max-width: 1260px;
+}
+
+.MuiSvgIcon-root {
+  color: #5B9B37;
+  width: 60px !important;
+  height: 60px !important;
+  margin-bottom: 10px !important;
+}
+
+.icon-info-list__item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #e5fff5;
+  padding: 20px;
+  max-width: 400px;
+  min-width: 300px;
+  border-radius: 10px;
+  flex-basis: 30%;
+}
+
+@media screen and (max-width: 550px) {
+  .number-info-list__item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .number-in-circle {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+
+  .number-info-list__item {
+    flex-basis: 90%;
+  }
+
+  .animation {
+    margin-bottom: 40px;
+  }
+
+  .number-info-list {
+    gap: 40px;
+  }
 }
