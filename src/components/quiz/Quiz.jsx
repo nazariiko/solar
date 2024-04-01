@@ -193,7 +193,7 @@ const Quiz = ({ handleHideHeader }) => {
           onClick={() => {
             setIsFirstScreen(false);
             handleHideHeader();
-            document.body.scrollTop = 0;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           className="first-screen-btn">
           Jetzt Preis-Check starten!
