@@ -85,7 +85,7 @@ const Quiz = ({ handleHideHeader }) => {
     return (
       <div className="quiz">
         <h2 style={{ marginBottom: '20px', textAlign: 'center', fontSize: 34 }}>
-          solarInvestCheck:{' '}
+          SolarInvestCheck:{' '}
         </h2>
         <p style={{ textAlign: 'center', fontSize: 20 }}>
           Lohnt sich die Investition in eine Solaranlage für Sie?
@@ -191,9 +191,11 @@ const Quiz = ({ handleHideHeader }) => {
         <div
           style={{ marginTop: '60px' }}
           onClick={() => {
-            setIsFirstScreen(false);
-            handleHideHeader();
             document.querySelector('.header').scrollIntoView({ block: "start", behavior: "smooth" })
+            setTimeout(() => {
+              setIsFirstScreen(false);
+              handleHideHeader();
+            }, 0);
           }}
           className="first-screen-btn">
           Jetzt Preis-Check starten!
