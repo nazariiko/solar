@@ -586,12 +586,3 @@ input {
     margin-top: 30px;
   }
 }
-
-html { 
-  height: 100%; 
-  overflow:auto; 
-}
-
-body { 
-  height: 100%; 
-}
