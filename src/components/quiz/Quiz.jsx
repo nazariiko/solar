@@ -47,7 +47,7 @@ const Quiz = ({ handleHideHeader }) => {
   };
 
   const handleScrollTop = () => {
-    quizRef.current.scrollIntoView({ behavior: 'smooth', block: "start" })
+    quizRef.current.scrollIntoView(true)
   }
 
   const handleForward = () => {
