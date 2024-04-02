@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Progress from '../progress/Progress';
 import questions from '../../data/questions';
 import marker from '../../assets/position-marker.svg';
@@ -25,6 +25,7 @@ const Quiz = ({ handleHideHeader }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstScreen, setIsFirstScreen] = useState(true);
   const [postalCodes, setPostalCodes] = useState([]);
+  const quizRef = useRef(null);
 
   const {
     register,
@@ -44,6 +45,10 @@ const Quiz = ({ handleHideHeader }) => {
     setActiveOption(null);
     setPage((prevPage) => prevPage - 1);
   };
+
+  const handleScrollTop = () => {
+    quizRef.current.scrollIntoView({ behavior: 'smooth', block: "start" })
+  }
 
   const handleForward = () => {
     setAnswers((prev) => {
@@ -83,7 +88,7 @@ const Quiz = ({ handleHideHeader }) => {
 
   if (isFirstScreen) {
     return (
-      <div className="quiz">
+      <div ref={quizRef} className="quiz">
         <h2 style={{ marginBottom: '20px', textAlign: 'center', fontSize: 34 }}>
           SolarInvestCheck:{' '}
         </h2>
@@ -191,11 +196,9 @@ const Quiz = ({ handleHideHeader }) => {
         <div
           style={{ marginTop: '60px' }}
           onClick={() => {
-            document.querySelector('.header').scrollIntoView({ block: "start", behavior: "smooth" })
-            setTimeout(() => {
-              setIsFirstScreen(false);
-              handleHideHeader();
-            }, 0);
+            handleScrollTop()
+            setIsFirstScreen(false);
+            handleHideHeader();
           }}
           className="first-screen-btn">
           Jetzt Preis-Check starten!

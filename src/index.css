@@ -71,6 +71,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  scroll-margin-top: 100px;
 }
 
 .question {
