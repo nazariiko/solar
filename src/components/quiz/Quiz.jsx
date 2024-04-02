@@ -85,7 +85,7 @@ const Quiz = ({ handleHideHeader }) => {
     return (
       <div className="quiz">
         <h2 style={{ marginBottom: '20px', textAlign: 'center', fontSize: 34 }}>
-          SolarInvestCheck:{' '}
+          solarInvestCheck:{' '}
         </h2>
         <p style={{ textAlign: 'center', fontSize: 20 }}>
           Lohnt sich die Investition in eine Solaranlage für Sie?
